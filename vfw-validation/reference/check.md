@@ -30,11 +30,11 @@ file corrupts every `§` after the switch point when re-saved.
 
 Group check lines under a shared `ID` with the same `CRITERIA`:
 ```
-ID=cno1;CRITERIA=AND;CHECK=ItemRevision:Attribute1§allowed§1~Invalid Attribute value
-ID=cno1;CRITERIA=AND;CHECK=ItemRevision:Attribute2§not eq§Review~Invalid Attribute value
+ID=chk1;CRITERIA=AND;CHECK=ItemRevision:Attribute1§allowed§1~Invalid Attribute value
+ID=chk1;CRITERIA=AND;CHECK=ItemRevision:Attribute2§not eq§Review~Invalid Attribute value
 
-ID=cno2;CRITERIA=OR;CHECK=ItemRevision:Source§allowed§2~BOM is required for this value
-ID=cno2;CRITERIA=OR;CHECK=ItemRevision:ViewType§exist§View~BOM is required for this value
+ID=chk2;CRITERIA=OR;CHECK=ItemRevision:Source§allowed§2~BOM is required for this value
+ID=chk2;CRITERIA=OR;CHECK=ItemRevision:ViewType§exist§View~BOM is required for this value
 ```
 
 ## Condition checks
@@ -42,8 +42,8 @@ ID=cno2;CRITERIA=OR;CHECK=ItemRevision:ViewType§exist§View~BOM is required for
 A `CRITERIA=CONDITION` line under an ID must pass before any `AND`/`OR`
 lines with the same ID are evaluated at all:
 ```
-ID=cno4;CRITERIA=CONDITION;CHECK=ItemRevision Master:unit_of_measure§eq§kg||l~PreCondition
-ID=cno4;CRITERIA=AND;CHECK=ItemRevision Master:hazard_class§not allowed§-~Test not successful
+ID=chk4;CRITERIA=CONDITION;CHECK=ItemRevision Master:unit_of_measure§eq§kg||l~PreCondition
+ID=chk4;CRITERIA=AND;CHECK=ItemRevision Master:hazard_class§not allowed§-~Test not successful
 ```
 Use this to gate a check to a subtype/alias, or to skip a check for objects
 already covered by a different path (the "precise reference is leading"
@@ -73,16 +73,16 @@ sensible "at least one" answer to give.
 declared earlier, in the same or an earlier CHECK dataset in the JOB's
 `CHECK=` list:
 ```
-ID=CNO-001;CRITERIA=AND;CHECK=C:ItemRevision:object_name§allowed§A*~...~...
-ID=CNO-002;CRITERIA=CONDITION;CHECK_ID=CNO-001
-ID=CNO-002;CRITERIA=AND;CHECK=C:ItemRevision:object_desc§allowed§B*~...~...
+ID=CHK-001;CRITERIA=AND;CHECK=C:ItemRevision:object_name§allowed§A*~...~...
+ID=CHK-002;CRITERIA=CONDITION;CHECK_ID=CHK-001
+ID=CHK-002;CRITERIA=AND;CHECK=C:ItemRevision:object_desc§allowed§B*~...~...
 ```
 
 **Import an entire check dataset** into another (`CRITERIA=IMPORT`,
 `CHECK_DATASET=`) — the importing JOB's EXPANSION/PROPERTY must still cover
 everything the imported checks need:
 ```
-ID=200;scope=Structure;CRITERIA=IMPORT;CHECK_DATASET=CNO_VFW_01_CHECK
+ID=200;scope=Structure;CRITERIA=IMPORT;CHECK_DATASET=VFW_01_CHECK
 ```
 
 ## Root/main/related scoping keywords

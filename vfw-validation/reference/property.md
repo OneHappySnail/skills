@@ -9,7 +9,7 @@ comma-separated datasets in a JOB's `PROPERTY=` field** (unlike EXPANSION/QUERY)
 ```
 Part:item_id                          # raw property name in output XML
 Part:item_id~PART_ID                  # aliased: <property name="PART_ID">
-Document/cno4_DocumentClass           # Master Form property (note: "/" not ":")
+Document/xyz4_DocumentClass           # Master Form property (note: "/" not ":")
 ```
 
 ## LOV, multilanguage, table, UID

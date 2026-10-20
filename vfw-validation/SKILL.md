@@ -1,11 +1,11 @@
 ---
 name: vfw-validation
-description: Write or edit MAIT/CNO Validation Framework (VFW) checks for Teamcenter - the EXPANSION/PROPERTY/CHECK/QUERY/JOB/TASK plain-text datasets. Use when asked to add, change, or debug a VFW/CNO_VFW validation, check, or rule, or when editing files named *_EXPANSION.txt, *_PROPERTY.txt, *_CHECK.txt, *_QUERY.txt, *_JOB.txt, or *_TASK.txt.
+description: Write or edit Validation Framework (VFW) checks for Teamcenter - the EXPANSION/PROPERTY/CHECK/QUERY/JOB/TASK plain-text datasets. Use when asked to add, change, or debug a VFW validation, check, or rule, or when editing files named *_EXPANSION.txt, *_PROPERTY.txt, *_CHECK.txt, *_QUERY.txt, *_JOB.txt, or *_TASK.txt.
 ---
 
 # VFW validation authoring
 
-MAIT/CNO Validation Framework (VFW) is a config-driven, no-source-published
+Validation Framework (VFW) is a config-driven, no-source-published
 Teamcenter add-on. Its syntax lives in `reference/` alongside this file,
 distilled from the admin manual — load only the file(s) you actually need:
 

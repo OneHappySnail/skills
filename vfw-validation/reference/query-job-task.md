@@ -27,7 +27,7 @@ Item Revision...
 Type=*
 ```
 A sub-query name (`~Name`) can also point at a **custom/registered saved
-query** rather than criteria for a generic one, e.g. `__CNO_BOM_FILTER`,
+query** rather than criteria for a generic one, e.g.
 `__ACTIVE_group_members`, or a site-specific `__<Name>` query installed on
 the Teamcenter server — these behave like opaque, pre-built filters and
 their exact parameter set has to be discovered from how they're already
@@ -43,22 +43,22 @@ operation, and is what an AW panel/RAC command/workflow handler actually
 invokes.
 
 ```
-QUERY=CNO_VFW_ITEM_QUERY
-EXPANSION=CNO_VFW_ITEM_EXPANSION
-PROPERTY=CNO_VFW_ITEM_PROPERTY
-CHECK=CNO_VFW_ITEM_RELEASE_CHECK
-TASK=CNO_VFW_ITEM_RELEASE_TASK
-SCRIPT=CNO_VFW_SCRIPT
+QUERY=VFW_ITEM_QUERY
+EXPANSION=VFW_ITEM_EXPANSION
+PROPERTY=VFW_ITEM_PROPERTY
+CHECK=VFW_ITEM_RELEASE_CHECK
+TASK=VFW_ITEM_RELEASE_TASK
+SCRIPT=VFW_SCRIPT
 ```
 
 | Field | Multiple datasets (comma-separated)? |
 |---|---|
 | `QUERY=` | **No.** |
 | `EXPANSION=` | **No.** |
-| `PROPERTY=` | Yes: `PROPERTY=CNO_1_PROPERTY,CNO_2_PROPERTY`. |
-| `CHECK=` | Yes: `CHECK=CNO_1_CHECK,CNO_2_CHECK`. |
+| `PROPERTY=` | Yes: `PROPERTY=VFW_1_PROPERTY,VFW_2_PROPERTY`. |
+| `CHECK=` | Yes: `CHECK=VFW_1_CHECK,VFW_2_CHECK`. |
 | `TASK=` | Yes — observed deployments and one manual example both show it, despite an unrelated manual paragraph claiming otherwise; treat that paragraph as an error. |
-| `SCRIPT=` | Yes — manual explicitly shows `SCRIPT=CNO_VFW_EXTERNAL_SCRIPT, CNO_VFW_SCRIPT`. |
+| `SCRIPT=` | Yes — manual explicitly shows `SCRIPT=VFW_EXTERNAL_SCRIPT, VFW_SCRIPT`. |
 
 Each `PROPERTY=`/`CHECK=` list must be declared on a single line, under
 1025 characters.
@@ -68,7 +68,7 @@ newlines, `###` between locale blocks:
 ```
 HELP=[en_US={CUSTOM_LOGO=MyLogo}<br><h4>{TC_USERNAME}, ...</h4>]###[de_DE=...]###
 ```
-Placeholders: `{CNO_LOGO}` (vendor logo), `{CUSTOM_LOGO=DatasetName}` (a
+Placeholders: `{CUSTOM_LOGO=DatasetName}` (a
 custom Image dataset — PNG/JPEG recommended, watch client performance with
 large images), `{TC_USERNAME}`, `{TC_GROUP}`, `{TC_ROLE}`.
 
