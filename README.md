@@ -10,3 +10,8 @@ Agent skills for Siemens Teamcenter work.
 | [tc-solution-spec](tc-solution-spec/) | Generates the Technical Solution Concept section. Picks up where tc-solution-concept leaves off. |
 | [vfw-validation](vfw-validation/) | Writes or edits Validation Framework (VFW) checks: the EXPANSION/PROPERTY/CHECK/QUERY/JOB/TASK plain-text datasets. |
 | [grilling](grilling/) | Interviews the user until a plan is fully understood. Invoked by the other skills when inputs are unclear. Copy of [mattpocock/skills](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md) by Matt Pocock (MIT). |
+| [tc-cpp](tc-cpp/) | Writes, reviews, or refactors Teamcenter server-side C/C++ (ITK, handlers, extensions, user exits). Covers ITK memory ownership, extern "C" error handling, logging, and legacy idioms. |
+
+## Templates
+
+- [templates/AGENTS.md](templates/AGENTS.md): project `AGENTS.md` for a Teamcenter customization repo. Copy to the project root and fill in the placeholders.

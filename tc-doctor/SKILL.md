@@ -77,7 +77,15 @@ Internal-...-DataManagement::saveData3 (                      top-level call ope
    - Bind values identify the scope object, such as a root UID.
 7. **Model the scaling.** Write cost as count × unit cost, e.g. items × per-item query. Check whether it matches the measured totals across runs. A matching O(n×m) model is strong evidence.
 8. **Trace to code.** grep the function names, user exits and preferences found in logs in `TC_ROOT/include*`, `TC_ROOT/lang`, `TC_DATA` and the customization repo. Quote `file:line`.
-9. **Explain "cannot reproduce" only with evidence.** Check, in the logs, for these differences between the slow and fast sessions:
+9. **Inspect binaries when source is missing.** Only to answer yes/no questions about what is deployed. Never decompile or disassemble Siemens binaries.
+   ```
+   dumpbin /exports <custom>.dll | findstr USER_             # user exits the customization overrides
+   dumpbin /imports <custom>.dll                             # ITK functions the customization calls
+   strings -n 6 <lib>.dll | findstr <preference>             # whether a library references a preference
+   (Get-Item <lib>.dll).VersionInfo; (Get-Item <lib>.dll).LastWriteTime   # deployed version vs repo tag
+   ```
+   A string match only shows the name is referenced, not that it is read on this path. Label it **inferred**.
+10. **Explain "cannot reproduce" only with evidence.** Check, in the logs, for these differences between the slow and fast sessions:
    - data state, e.g. an attribute already computed, so a path is skipped
    - user, group or role (`SA_find_role` in the journal), which changes preferences
    - concurrency, from overlapping sessions in the timestamps
@@ -124,7 +132,7 @@ saveData3: aligns=156 total=4s    withIDIC=0   gapAfterIDIC=0s    avg(IDIC)=0.00
 ```
 
 Code references:
-- `TC_ROOT/include/me/me_user_exits.h`: `USER_is_chain_needed_for_idic_generation` (line 518) and `USER_force_update_of_chain_based_idic` (line 533). Check whether the customization overrides either one.
+- `TC_ROOT/include/me/me_user_exits.h`: `USER_is_chain_needed_for_idic_generation` (line 518) and `USER_force_update_of_chain_based_idic` (line 533). Check whether the customization overrides either one (no source: `dumpbin /exports`, Method step 9).
 - `TC_ROOT/include/me/me.h:1227`: the preference `MECopyIdInContextToAssignedLine` and the utility `me_fix_idic`. Quote the header text. Don't recommend either as a fix without GTAC confirming it.
 
 Not verified: why some lines skip IDIC. "The line already carried an IDIC" is a hypothesis. Confirm it from `bl_abs_occ_id` values on the lines involved.
