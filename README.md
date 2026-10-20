@@ -9,3 +9,4 @@ Agent skills for Siemens Teamcenter work.
 | [tc-solution-concept](tc-solution-concept/) | Generates the business and functional sections of a Solution Concept Document, guiding the user through questions until all details are clear. |
 | [tc-solution-spec](tc-solution-spec/) | Generates the Technical Solution Concept section. Picks up where tc-solution-concept leaves off. |
 | [vfw-validation](vfw-validation/) | Writes or edits Validation Framework (VFW) checks: the EXPANSION/PROPERTY/CHECK/QUERY/JOB/TASK plain-text datasets. |
+| [grilling](grilling/) | Interviews the user until a plan is fully understood. Invoked by the other skills when inputs are unclear. Copy of [mattpocock/skills](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md) by Matt Pocock (MIT). |

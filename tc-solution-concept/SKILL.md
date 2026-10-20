@@ -14,6 +14,8 @@ description: >
 
 Business and functional part of a Solution Concept Document for a Teamcenter customization. The technical section is added by `tc-solution-spec` into the same JSON.
 
+When inputs are unclear or missing, run the `grilling` skill before proceeding.
+
 Never write the document by hand. Content goes into `concept.json`. `fill.py` renders it through `template.md`, which fixes layout, headings, table shapes and boilerplate text.
 
 - `template.md`: static layout. Change only when the user asks.

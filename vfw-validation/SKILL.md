@@ -5,6 +5,8 @@ description: Write or edit Validation Framework (VFW) checks for Teamcenter - th
 
 # VFW validation authoring
 
+When inputs are unclear or missing, run the `grilling` skill before proceeding.
+
 Validation Framework (VFW) is a config-driven, no-source-published
 Teamcenter add-on. Its syntax lives in `reference/` alongside this file,
 distilled from the admin manual — load only the file(s) you actually need:

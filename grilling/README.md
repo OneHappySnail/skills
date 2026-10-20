@@ -1,0 +1,1 @@
+Verbatim copy of [grilling](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md) by Matt Pocock, MIT licensed (see [LICENSE](LICENSE)). Kept here for convenience; update by re-copying upstream.

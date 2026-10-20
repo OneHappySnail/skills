@@ -7,6 +7,8 @@ description: Create a Siemens PLMS Incident Report (IR, GTAC ticket) from tc-doc
 
 Companion to `tc-doctor`. Turns its findings into an IR. Never write the IR by hand.
 
+When inputs are unclear or missing, run the `grilling` skill before proceeding.
+
 Output is always the `.md` file from `fill.py`, ready to copy and paste into the Siemens ticket. Never publish it as an artifact, doc, website or HTML page, and never convert it to another format.
 
 The Siemens ticket form is a Quill rich-text editor, not a Markdown renderer. Pasted Markdown syntax shows up literally. So the output must be plain text:

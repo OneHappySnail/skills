@@ -5,6 +5,8 @@ description: Analyze and debug issues with Siemens Teamcenter and Active Workspa
 
 # Teamcenter context
 
+When inputs are unclear or missing, run the `grilling` skill before proceeding.
+
 If the current execution environment has the TC_ROOT and TC_DATA environment variable NOT defined ask the user to provide it before attempting to analyze everything.
 
 User should provide information about the failing session by providing syslogs.

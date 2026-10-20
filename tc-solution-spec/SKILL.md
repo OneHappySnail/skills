@@ -12,6 +12,8 @@ description: >
 
 Writes the `technical` block of the `concept.json` that `tc-solution-concept` creates, and renders it with that skill's `fill.py`. Never write the section by hand. Implementers consume it, so ground it in what Teamcenter actually supports.
 
+When inputs are unclear or missing, run the `grilling` skill before proceeding.
+
 Renderer: `<skills-dir>/tc-solution-concept/fill.py`. Schema: the `technical` block in its `example.json`.
 
 ## Customization layers
