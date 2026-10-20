@@ -1,0 +1,87 @@
+{
+  "title": "Slow EBOM to MBOM assignment: ID in Context generation runs a full-MBOM query per element",
+  "site_id": "",
+  "severity": "",
+  "contact": "",
+  "product": "Teamcenter / Active Workspace, Manufacturing BOM Management",
+  "version": "Teamcenter 2512.2605, Active Workspace 2512",
+  "platform": "Windows",
+  "database": "Oracle",
+  "environments_affected": "Production; not reproduced on TCVAL",
+  "users_affected": "At least 4 of 5 sampled users (u2-u5); u1 not affected",
+  "devices_affected": "",
+  "other_versions": "",
+  "summary": "mbmAssignFromEbomToMbomCommand takes 5-30 minutes instead of 20-30 seconds for about 100-170 elements.",
+  "problem": "Assigning elements from EBOM to MBOM via Active Workspace is slow for most users. Each assigned line runs ID in Context generation, which executes a query over the whole MBOM.",
+  "impact": "Planners wait up to 30 minutes per assignment.",
+  "measurements": {
+    "columns": [
+      "Run",
+      "Aligns",
+      "With IDIC",
+      "saveData3 wall",
+      "Per line"
+    ],
+    "rows": [
+      [
+        "u4 /14",
+        105,
+        105,
+        "1938s",
+        "18.35s"
+      ],
+      [
+        "u3 /13",
+        132,
+        132,
+        "334s",
+        "2.43s"
+      ],
+      [
+        "u1 /13",
+        156,
+        0,
+        "24s",
+        "0.02s"
+      ]
+    ]
+  },
+  "analysis": [
+    {
+      "heading": "IDIC callback present in every slow align call",
+      "text": "USER_is_chain_needed_for_idic_generation runs in all 105 align calls of u4 /14 and in none of u1 /13.",
+      "excerpt": "saveData3: aligns=105 total=1927s withIDIC=105 gapAfterIDIC=1911s avg(IDIC)=18.35s",
+      "status": "verified"
+    },
+    {
+      "heading": "Per-line variance from database load",
+      "text": "Same SQL_ID and plan hash run 2-18s per line across sessions.",
+      "status": "inferred"
+    }
+  ],
+  "steps": [
+    "Open an MBOM with IDIC-bearing appearance path nodes in Active Workspace.",
+    "Select about 100 EBOM lines without ID in Context.",
+    "Run Assign from EBOM to MBOM."
+  ],
+  "workarounds": "",
+  "questions": [
+    "Is the full-MBOM query per assigned line expected behavior of IDIC generation?"
+  ],
+  "attachments": {
+    "columns": [
+      "File",
+      "Content"
+    ],
+    "rows": [
+      [
+        "u4/tcserver.exe406c671d.syslog",
+        "Slow run syslog with TC_SLOW_SQL"
+      ],
+      [
+        "u4/tcserver.exe406c671d.jnl",
+        "Slow run journal"
+      ]
+    ]
+  }
+}

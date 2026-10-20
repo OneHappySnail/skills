@@ -1,0 +1,97 @@
+{
+  "topic": "Mandatory Document Classification on Release",
+  "jira": ["PLM-1234 (In Progress)", "PLM-1240 (Open)"],
+  "program": "PLM Release 3.1",
+  "requirement_owner": "Process owner, Document Management",
+  "working_groups": ["Engineering", "Document Control"],
+  "leads": ["Lead IP"],
+  "contributors": ["Contributor A", "Contributor B"],
+  "approvers": [],
+  "status": "DRAFT",
+  "history": [
+    ["0.1", "2026-10-20", "Lead IP", "Initial draft"]
+  ],
+  "purpose": "Documents are released without a document class today. Downstream consumers cannot filter or route them.\n\nThis concept introduces a mandatory document class, checked before release.",
+  "objectives": [
+    {"title": "Complete classification", "points": ["Every released Document Revision carries a document class."]},
+    {"title": "No manual rework", "points": ["Missing classes are caught before the release workflow starts."]}
+  ],
+  "business_context": "Document Revisions are released through the standard release workflow in Teamcenter.",
+  "challenges": [
+    {"title": "Unclassified releases", "text": "About 30% of released documents carry no class."}
+  ],
+  "drivers": [
+    {"title": "Downstream routing", "text": "Consumers route documents by class."}
+  ],
+  "stakeholders": [
+    ["Engineering", "Release documents without extra steps"],
+    ["Document Control", "Reliable classification"]
+  ],
+  "scope": {
+    "in": [
+      {"heading": "Data Model", "items": ["New LOV-backed property on Document Revision"]},
+      {"heading": "Workflow", "items": ["Release blocked when the class is empty"]}
+    ],
+    "out": [
+      {"heading": "Migration", "items": ["Classification of already released documents (separate concept)"]}
+    ]
+  },
+  "use_cases": [
+    {
+      "title": "Release a classified document",
+      "trigger": "User submits a Document Revision to the release workflow",
+      "outcome": "Only classified documents get released",
+      "frequency": "Very high",
+      "narrative": "The user sets the document class in Active Workspace and starts the release workflow. The workflow checks the class before the first review task.",
+      "rules": ["Class must be a value of the document class LOV.", "Released revisions cannot change their class."]
+    }
+  ],
+  "ui": {
+    "summary": "One new mandatory field on the Document Revision summary page.",
+    "current": ["Users release documents without setting a class."],
+    "target": ["Users pick a class from a dropdown before release."],
+    "impact": ["One extra field to fill per document."],
+    "support": ["AWC stylesheet change for the summary and create panels."],
+    "validation": "If the class is empty when the workflow starts, the workflow is not started and the user sees the error message defined in the technical concept."
+  },
+  "assumptions": [
+    ["The LOV values are owned and maintained by Document Control.", "LOV changes need a BMIDE deployment per change."]
+  ],
+  "limitations": [
+    ["Existing releases", "Already released documents stay unclassified.", "Separate migration concept."]
+  ],
+  "risks": [
+    ["Users pick a wrong class to pass the check", "Medium", "Medium", "Training, periodic report on class distribution"]
+  ],
+  "acceptance": {
+    "functional": [
+      ["Release workflow refuses a Document Revision without class.", "Test case on TEST environment"]
+    ],
+    "user": [
+      ["Class field is visible on summary and create panels.", "UAT walkthrough"]
+    ]
+  },
+  "technical": {
+    "intro": "The class is a BMIDE property with a static LOV. A workflow rule handler checks it at release start. AWC shows it through a stylesheet change.",
+    "architecture": {
+      "text": "Three building blocks, no custom server code beyond one rule handler.",
+      "rows": [
+        ["Document class property", "Stores the class", "BMIDE property + static LOV"],
+        ["Release check", "Blocks release without class", "Workflow rule handler"],
+        ["Summary/create panel", "Shows and edits the class", "AWC stylesheet"]
+      ]
+    },
+    "data_model": "- `DocumentRevision.x4_doc_class`: `STRING(32)`, local, attached to LOV `x4_DocClass` (static).",
+    "workflow": "- Template: release workflow, root task `start` event.\n- Rule handler `EPM-check-object-properties` on `x4_doc_class`.\n- Error behavior: block.",
+    "separation": {
+      "rows": [
+        ["BMIDE", "Property, LOV"],
+        ["Workflow", "Release check"],
+        ["AWC", "Stylesheets"]
+      ]
+    }
+  },
+  "open_points": [
+    ["Final list of document classes", "@Document Control", "OPEN"]
+  ]
+}
